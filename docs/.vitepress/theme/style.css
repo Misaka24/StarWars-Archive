@@ -1,0 +1,175 @@
+/* 用红框测试是否加载成功 */
+body {
+  border: 10px solid red !important;
+}
+
+/* ========== 1. 星战字体 ========== */
+@font-face {
+  font-family: 'StarJedi';
+  src: url('/fonts/StarJedi.ttf') format('truetype');
+  font-display: swap;
+}
+
+/* ========== 2. 全局配色、布局 ========== */
+:root {
+  --vp-font-family-base: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont,
+    'Helvetica Neue', Arial, sans-serif;
+
+  --vp-c-brand: #38bdf8;
+  --vp-c-brand-light: #7dd3fc;
+  --vp-c-brand-dark: #0ea5e9;
+
+  --vp-layout-max-width: 1400px;
+}
+
+/* 深色模式（太空黑） */
+.dark {
+  background-color: #020617 !important;
+  --vp-c-bg: #020617;
+  --vp-c-bg-soft: #020617;
+  --vp-c-bg-alt: #020617;
+  --vp-c-text: #e5e7eb;
+}
+
+/* ========== 3. 文本 & 标题 ========== */
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  font-family: 'StarJedi', var(--vp-font-family-base);
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+.VPHomeHero .name,
+.VPHomeHero .text {
+  font-family: 'StarJedi', var(--vp-font-family-base);
+  letter-spacing: 2px;
+}
+
+.markdown h1 {
+  font-size: 2.4rem;
+  margin-top: 2.4rem;
+}
+
+.markdown h2 {
+  border-left: 4px solid var(--vp-c-brand);
+  padding-left: 12px;
+  margin-top: 2rem;
+}
+
+.markdown p {
+  line-height: 1.8;
+  margin: 0.75rem 0;
+}
+
+/* ========== 4. 首页 Hero 美化 ========== */
+.VPHomeHero {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 64px;
+  background:
+    radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 60%),
+    radial-gradient(circle at bottom, rgba(59, 130, 246, 0.12), transparent 60%);
+}
+
+.VPHomeHero::before {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(248, 250, 252, 0.25) 1px, transparent 0);
+  background-size: 40px 40px;
+  opacity: 0.35;
+}
+
+.VPHomeHero .image {
+  filter: drop-shadow(0 0 24px rgba(56, 189, 248, 0.7));
+}
+
+/* ========== 5. 光剑按钮动画（最终正确版本） ========== */
+
+/* 第一步：**选外层 wrapper**（因为 lightsaber-btn 在外层） */
+.VPHomeHero .actions .lightsaber-btn {
+  position: relative;
+  overflow: hidden;
+  border-radius: 999px;
+  padding-inline: 1.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  /* 霓虹光边 */
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.6),
+    0 0 18px rgba(56, 189, 248, 0.8);
+}
+
+/* 第二步：光剑扫动效果加在 wrapper::before 上 */
+.VPHomeHero .actions .lightsaber-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-130%) skewX(-18deg);
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(248, 250, 252, 0.0) 35%,
+    rgba(191, 219, 254, 0.5) 50%,
+    rgba(56, 189, 248, 0.9) 60%,
+    transparent 100%
+  );
+  opacity: 0.9;
+  pointer-events: none;
+  animation: lightsaber-sweep 2.2s linear infinite;
+}
+
+/* hover */
+.VPHomeHero .actions .lightsaber-btn:hover {
+  box-shadow:
+    0 0 0 1px rgba(125, 211, 252, 0.9),
+    0 0 24px rgba(56, 189, 248, 1);
+}
+
+/* 光剑动画 */
+@keyframes lightsaber-sweep {
+  0%   { transform: translateX(-130%) skewX(-18deg); }
+  100% { transform: translateX(130%)  skewX(-18deg); }
+}
+
+/* 第二个按钮（alt） */
+.VPHomeHero .actions .VPButton:not(.lightsaber-btn) {
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: rgba(15, 23, 42, 0.8);
+}
+
+/* ========== 6. 图片、美化卡片 ========== */
+.markdown img {
+  border-radius: 10px;
+  box-shadow: 0 0 18px rgba(15, 23, 42, 0.9);
+}
+
+.sw-card {
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin: 18px 0;
+  background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), #020617 60%);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  color: #e5e7eb;
+}
+
+.sw-warning {
+  border-left: 4px solid #fde047;
+  padding: 10px 14px;
+  margin: 14px 0;
+  background: rgba(250, 204, 21, 0.08);
+  border-radius: 10px;
+}
+
+.sw-info {
+  border-left: 4px solid #38bdf8;
+  padding: 10px 14px;
+  margin: 14px 0;
+  background: rgba(56, 189, 248, 0.08);
+  border-radius: 10px;
+}
