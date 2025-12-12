@@ -1493,6 +1493,27 @@ html {
   background-color: #040815 !important;
 }
 
+/* ===== 修复首页 Hero 中文被裁（clip 裁字问题） ===== */
+.VPHomeHero .name.clip {
+  overflow: visible !important;   /* ★ 核心修复 */
+  line-height: 1.3 !important;    /* ★ 中文安全行高 */
+  padding-bottom: 0.15em;         /* ★ 给下沿一点空间 */
+}
 
+/* =================================================
+   终极方案：锁死顶栏颜色变量，彻底消除跳变
+   ================================================= */
 
+/* 顶栏基础文字颜色 */
+:root {
+  --vp-c-text-1: #cbd5e1;
+  --vp-c-text-2: #cbd5e1;
+  --vp-c-text-3: #cbd5e1;
+}
 
+/* 顶栏 hover / active 统一 */
+:root {
+  --vp-c-brand: #8da0ff;
+  --vp-c-brand-light: #8da0ff;
+  --vp-c-brand-dark: #8da0ff;
+}
