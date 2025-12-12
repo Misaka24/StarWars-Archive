@@ -1,0 +1,62 @@
+/* ===============================
+   左侧悬浮隐藏侧栏
+   =============================== */
+
+:root {
+  --sidebar-width: 260px;
+  --sidebar-hidden-offset: calc(-1 * (var(--sidebar-width) - 8px));
+}
+
+/* 固定侧栏，不占文档流 */
+.VPSidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  z-index: 30;
+  transform: translateX(0);
+  transition: transform .25s ease;
+}
+
+/* 触发条（左侧 8px） */
+.sidebar-trigger-zone {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 8px;
+  height: 100vh;
+  z-index: 40;
+}
+
+/* 收起状态 */
+.sidebar-auto-hide .VPSidebar {
+  transform: translateX(var(--sidebar-hidden-offset));
+}
+
+/* 展开状态 */
+.sidebar-open .VPSidebar {
+  transform: translateX(0);
+}
+
+/* ===============================
+   正文容器布局调整（关键）
+   =============================== */
+
+/* 默认正文：留出侧栏空间 */
+.VPContent.has-sidebar {
+  padding-left: var(--sidebar-width);
+  transition: padding-left .25s ease;
+}
+
+/* 收起 → 正文利用左侧空间 */
+.sidebar-auto-hide .VPContent.has-sidebar {
+  padding-left: 0;
+}
+
+/* 展开 → 恢复原来布局 */
+.sidebar-open .VPContent.has-sidebar {
+  padding-left: var(--sidebar-width);
+}
+
+/* 右侧栏（VPDocAside）不受任何影响 */

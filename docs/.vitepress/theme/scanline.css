@@ -1,0 +1,59 @@
+/* =========================================================
+   STAR WARS CRT Scanlines
+   ========================================================= */
+
+:root {
+  /* 强度：介于 0.34 与 0.42 之间 */
+  --crt-scan-opacity: 0.4;
+
+  /* 亮部：略强于轻量版，但仍克制 */
+  --crt-scan-light: rgba(255, 255, 255, 0.048);
+
+  /* 暗部：形成纹理对比，但不成条 */
+  --crt-scan-dark: rgba(0, 0, 0, 0.15);
+
+  /* 密度：介于 4px 与 5px */
+  --crt-scan-gap: 4.5px;
+}
+
+/* =========================================================
+   首页（index.md / .VPHome）专属扫描线
+   ========================================================= */
+.VPHome::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9996;
+  pointer-events: none;
+
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--crt-scan-light) 0px,
+    var(--crt-scan-light) 1px,
+    var(--crt-scan-dark) 2px,
+    transparent var(--crt-scan-gap)
+  );
+
+  opacity: var(--crt-scan-opacity);
+
+  /* 呼吸感：介于 8s 与 10s */
+  animation: crt-home-breath-mid 9s ease-in-out infinite;
+}
+
+/* =========================================================
+   中轻度呼吸动画
+   ========================================================= */
+@keyframes crt-home-breath-mid {
+  0%   { opacity: 0.36; }
+  50%  { opacity: 0.41; }
+  100% { opacity: 0.36; }
+}
+
+/* =========================================================
+   移动端进一步压制
+   ========================================================= */
+@media (max-width: 768px) {
+  .VPHome::before {
+    opacity: 0.30;
+  }
+}
