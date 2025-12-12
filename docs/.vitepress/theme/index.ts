@@ -4,37 +4,36 @@ import './style.css'
 import './sidebar-float.css'
 import './scanline.css'
 
-
 export default {
   ...DefaultTheme,
 
   enhanceApp(ctx: EnhanceAppContext) {
-    document.documentElement.classList.add('dark')
+    console.log('CUSTOM THEME LOADED!')
 
-    if (typeof DefaultTheme.enhanceApp === 'function') {
-      DefaultTheme.enhanceApp(ctx)
-    }
-
+    //一切 DOM / window / document 操作，必须放在这里
     if (typeof window !== 'undefined') {
+      // 强制暗色模式
+      document.documentElement.classList.add('dark')
+
       const body = document.body
 
-      // 初始设置：自动隐藏
+      // 初始设置：侧边栏自动隐藏
       body.classList.add('sidebar-auto-hide')
 
-      // 触发条
+      // 创建触发条
       const trigger = document.createElement('div')
       trigger.className = 'sidebar-trigger-zone'
       document.body.appendChild(trigger)
 
-      // 悬停展开
+      // 悬停展开侧边栏
       trigger.addEventListener('mouseenter', () => {
         body.classList.add('sidebar-open')
         body.classList.remove('sidebar-auto-hide')
       })
 
-      // 鼠标离开左侧栏 → 收起
+      // 鼠标离开侧边栏 → 自动收起
       document.addEventListener('mousemove', (e) => {
-        const sidebar = document.querySelector('.VPSidebar') as HTMLElement
+        const sidebar = document.querySelector('.VPSidebar') as HTMLElement | null
         if (!sidebar) return
 
         const rect = sidebar.getBoundingClientRect()
@@ -49,6 +48,11 @@ export default {
           body.classList.add('sidebar-auto-hide')
         }
       })
+    }
+
+    //最后再调用默认主题的 enhanceApp
+    if (typeof DefaultTheme.enhanceApp === 'function') {
+      DefaultTheme.enhanceApp(ctx)
     }
   }
 }
