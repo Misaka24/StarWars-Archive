@@ -1594,7 +1594,7 @@ html {
     position: relative;
 
     /* 给足可视高度（用视口，不用猜 px） */
-    min-height: 40vh !important;
+    min-height: 32vh !important;
     height: auto !important;
 
     /* 允许内容完整显示 */
