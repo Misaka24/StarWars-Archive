@@ -705,7 +705,10 @@ strong {
   margin: 1.8rem 0 0;
   padding: 0;
   position: relative;
-  min-height: 200px;
+  /* 桌面端基础高度 */
+  min-height: 320px;
+  /* ★ 关键：为下面模块预留真实空间 */
+  margin-bottom: 4rem;
 
   /* 星空背景 + 蓝色光晕 */
   background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.08), transparent 60%);
@@ -818,7 +821,7 @@ strong {
 
 #宇宙大事件一览 + ul {
   position: relative;
-  padding-bottom: 2.0rem; /* 给刻度留空间 */
+  padding-bottom: 0; /* 给刻度留空间 */
 }
 
 /* ===================================== */
@@ -1517,3 +1520,102 @@ html {
   --vp-c-brand-light: #8da0ff;
   --vp-c-brand-dark: #8da0ff;
 }
+
+/* =================================================
+   顶栏字号终极统一（解决资料库“看起来更大/更小”）
+   ================================================= */
+
+/* 统一顶栏项目的字体尺寸 */
+:root {
+  --vp-nav-item-font-size: 16px;
+  --vp-nav-item-height: auto;   /* 关键：解除 button 的高度锁死 */
+}
+
+/* 桌面端：普通链接 + 菜单组按钮 */
+.VPNav .VPLink,
+.VPNavBarMenuGroup > button,
+.VPNavBarMenuGroup > button .text {
+  font-size: 16px !important;
+  line-height: 1.4 !important;     /* 统一视觉高度 */
+  height: auto !important;         /* ★ 核心 */
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+
+/* 小屏 / NavScreen */
+.VPNavScreen a {
+  font-size: 16px !important;
+  line-height: 1.4 !important;
+}
+
+@media (max-width: 768px) {
+  #宇宙大事件一览 + ul {
+    padding-bottom: 6rem;
+  }
+}
+
+@media (min-width: 769px) {
+  #宇宙大事件一览 {
+    margin-bottom: 1.2rem;
+  }
+}
+
+@media (min-width: 769px) {
+  #宇宙大事件一览 + ul {
+    min-height: 300px;
+    margin-bottom: 3rem;
+  }
+}
+
+@media (min-width: 769px) {
+  #宇宙大事件一览 + ul > li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 2.4rem;
+    padding-bottom: 2.4rem;
+  }
+}
+
+@media (min-width: 769px) {
+  #宇宙大事件一览 + ul {
+    min-height: 240px !important;
+    margin-bottom: 1.2rem !important;
+  }
+}
+@media (min-width: 769px) {
+  .sw-intro-card {
+    margin-top: 1.2rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #宇宙大事件一览 + ul {
+    position: relative;
+
+    /* 给足可视高度（用视口，不用猜 px） */
+    min-height: 40vh !important;
+    height: auto !important;
+
+    /* 允许内容完整显示 */
+    overflow: visible !important;
+
+    /* 与下方模块的安全距离 */
+    margin-bottom: 2rem !important;
+    padding-bottom: 0 !important;
+  }
+}
+@media (max-width: 768px) {
+  #宇宙大事件一览 + ul > li {
+    position: absolute;
+    inset: 0;
+
+    /* 垂直居中，但不裁切 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    transform: none !important;
+  }
+}
+
