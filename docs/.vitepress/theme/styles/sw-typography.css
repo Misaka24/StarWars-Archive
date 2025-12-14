@@ -1,0 +1,145 @@
+/* =========================================
+   styles/sw-typography.css  (正文排版 + 标题体系)
+   ========================================= */
+.vp-doc h1,
+.VPHomeHero .name {
+  font-family: "StarJedi", var(--vp-font-family-base);
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  font-size: 3rem;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+
+  background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.4));
+}
+
+.VPHomeHero .text {
+  font-family: "StarJedi", var(--vp-font-family-base);
+  letter-spacing: 2px;
+}
+
+.vp-doc h2 {
+  font-family: "StarJedi", var(--vp-font-family-base);
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  font-size: 2rem;
+  display: inline-block;
+  margin-top: 3rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.3);
+  color: var(--vp-c-brand-light);
+}
+
+.vp-doc h3 {
+  font-family: "StarJedi", var(--vp-font-family-base);
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--vp-c-brand-light);
+}
+
+.vp-doc p {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  color: #cbd5e1;
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+/* 首段首字下沉：限定在正文文档区域 */
+.vp-doc > p:first-of-type::first-letter {
+  float: left;
+  font-size: 3.5rem;
+  line-height: 0.8;
+  margin-right: 0.75rem;
+  color: var(--vp-c-brand);
+  font-family: "StarJedi", sans-serif;
+  text-shadow: 0 0 10px var(--vp-c-brand);
+}
+
+/* 引用：片头黄 */
+.vp-doc blockquote {
+  border-left: none;
+  color: #fde047;
+  font-family: "StarJedi", var(--vp-font-family-base);
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  background: transparent;
+  padding: 1rem 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.vp-doc blockquote::before,
+.vp-doc blockquote::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 2px;
+  background: #fde047;
+  margin: 10px auto;
+  opacity: 0.5;
+}
+
+/* 强调：限定在 vp-doc，避免影响导航等 */
+.vp-doc strong {
+  color: #fde047;
+  font-weight: 700;
+  text-shadow: 0 0 5px rgba(253, 224, 71, 0.4);
+}
+
+/* =====================================================
+   FINAL FIX：彻底禁止 H1 图标（不留任何余地）
+   ===================================================== */
+
+/* 禁止 H1 本体的所有伪元素 */
+.vp-doc h1::before,
+.vp-doc h1::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* 禁止 H1 内部任何元素的伪元素（兜底） */
+.vp-doc h1 *::before,
+.vp-doc h1 *::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* 禁止 header-anchor 搞事情（VitePress 常见来源） */
+.vp-doc h1 .header-anchor,
+.vp-doc h1 .header-anchor::before,
+.vp-doc h1 .header-anchor::after {
+  display: none !important;
+}
+/* =====================================================
+   FIX：黄线之间的 blockquote 内容居中（仅 CSS）
+   ===================================================== */
+
+/* 整个引用块作为居中容器 */
+.vp-doc blockquote {
+  text-align: center;          /* 核心：文字居中 */
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 760px;            /* 控制行宽，防止过散 */
+}
+
+/* blockquote 内所有段落统一居中 */
+.vp-doc blockquote p {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 如果英文是斜体或单独一行，保持居中 */
+.vp-doc blockquote em,
+.vp-doc blockquote i {
+  display: inline-block;
+  text-align: center;
+}
+

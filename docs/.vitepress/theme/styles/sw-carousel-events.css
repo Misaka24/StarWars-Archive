@@ -1,0 +1,352 @@
+/* =========================================
+   styles/sw-carousel-events.css  (宇宙大事件轮播)
+   依赖结构：#宇宙大事件一览 + ul > li  (6项)
+   ========================================= */
+
+/* 模块标题与容器距离 */
+#宇宙大事件一览 {
+  margin-bottom: 0.8rem;
+}
+
+/* 轮播容器：预留空间，避免与下方模块重叠 */
+#宇宙大事件一览 + ul {
+  list-style: none;
+  margin: 0.3rem 0 2rem;
+  padding: 0;
+  position: relative;
+
+  min-height: 240px;
+  border-radius: 18px;
+  padding-top: 1.2rem;
+
+  background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.08), transparent 60%);
+}
+
+/* 移动端：用视口高度保底 */
+@media (max-width: 768px) {
+  #宇宙大事件一览 + ul {
+    min-height: 32vh !important;
+    margin-bottom: 2rem !important;
+  }
+}
+
+/* 卡片（叠加轮播） */
+#宇宙大事件一览 + ul > li {
+  position: absolute;
+  inset: 0;
+
+  /* 内容居中且不裁切 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+  /* 版式 */
+  left: 14%;
+  right: 14%;
+  top: 0;
+
+  padding: 2.2rem 2.4rem 3.2rem;
+  border-radius: 22px;
+
+  font-family: "StarJedi", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 1.35rem;
+  line-height: 1.6;
+  letter-spacing: 0.03em;
+
+  color: #e7edf7;
+  background: rgba(10, 15, 30, 0.78);
+  backdrop-filter: blur(6px);
+
+  border: 1px solid rgba(120, 180, 255, 0.25);
+  border-left: 4px solid var(--saber-color);
+
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  animation: swEventCycle 36s infinite;
+}
+
+/* 文本块宽度控制 */
+#宇宙大事件一览 + ul > li p {
+  max-width: 80%;
+  margin: 0.35rem auto;
+}
+
+/* 标题 */
+#宇宙大事件一览 + ul > li strong {
+  display: block;
+  margin: 0.6rem 0 1rem;
+  font-family: "StarJedi", sans-serif !important;
+  font-size: 2.1rem;
+  letter-spacing: 0.06em;
+  color: #f8f9ff;
+  text-shadow: 0 0 12px rgba(125, 211, 252, 0.7), 0 0 28px rgba(56, 189, 248, 0.5);
+}
+
+/* 年代行（最后一行） */
+#宇宙大事件一览 + ul > li p:last-child {
+  margin-top: 0.9rem;
+  font-size: 1.25rem;
+  letter-spacing: 0.08em;
+  color: #9bd2ff;
+  text-shadow: 0 0 10px rgba(90, 150, 255, 0.6);
+}
+
+/* 阵营颜色：只保留你最后确定的 6 条映射 */
+#宇宙大事件一览 + ul > li {
+  --saber-color: rgba(56, 189, 248, 0.9);
+}
+#宇宙大事件一览 + ul > li:nth-child(1) {
+  --saber-color: rgba(248, 113, 113, 0.95);
+}
+#宇宙大事件一览 + ul > li:nth-child(2) {
+  --saber-color: rgba(244, 114, 182, 0.95);
+}
+#宇宙大事件一览 + ul > li:nth-child(3) {
+  --saber-color: rgba(59, 130, 246, 0.95);
+}
+#宇宙大事件一览 + ul > li:nth-child(4) {
+  --saber-color: rgba(248, 250, 252, 0.95);
+}
+#宇宙大事件一览 + ul > li:nth-child(5) {
+  --saber-color: rgba(251, 146, 60, 0.95);
+}
+#宇宙大事件一览 + ul > li:nth-child(6) {
+  --saber-color: rgba(239, 68, 68, 0.95);
+}
+
+/* 轮播延迟：6 张卡 */
+#宇宙大事件一览 + ul > li:nth-child(1) { animation-delay: 0s; }
+#宇宙大事件一览 + ul > li:nth-child(2) { animation-delay: 6s; }
+#宇宙大事件一览 + ul > li:nth-child(3) { animation-delay: 12s; }
+#宇宙大事件一览 + ul > li:nth-child(4) { animation-delay: 18s; }
+#宇宙大事件一览 + ul > li:nth-child(5) { animation-delay: 24s; }
+#宇宙大事件一览 + ul > li:nth-child(6) { animation-delay: 30s; }
+
+@keyframes swEventCycle {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  5% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  12% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  16% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.99);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* 发光系统：仅在展示区间亮（无 hover 依赖） */
+#宇宙大事件一览 + ul > li::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle at 50% 50%,
+    color-mix(in srgb, var(--saber-color) 55%, transparent) 0%,
+    color-mix(in srgb, var(--saber-color) 25%, transparent) 40%,
+    transparent 80%
+  );
+
+  opacity: 0;
+  transform: scale(0.85);
+  animation: swPulseCore 36s infinite;
+}
+
+#宇宙大事件一览 + ul > li::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 22px;
+  pointer-events: none;
+
+  box-shadow: 0 0 22px var(--saber-color),
+    0 0 44px color-mix(in srgb, var(--saber-color) 85%, transparent);
+
+  opacity: 0;
+  animation: swEdgeGlow 36s infinite;
+}
+
+@keyframes swPulseCore {
+  0%   { opacity: 0;   transform: scale(0.75); }
+  4%   { opacity: 0.55; transform: scale(1); }
+  8%   { opacity: 0.75; transform: scale(1.07); }
+  12%  { opacity: 0.45; transform: scale(1); }
+  16%  { opacity: 0;   transform: scale(0.9); }
+  100% { opacity: 0; }
+}
+
+@keyframes swEdgeGlow {
+  0%, 3% { opacity: 0; }
+  4%     { opacity: 1; }
+  8%     { opacity: 1; }
+  12%    { opacity: 0.8; }
+  16%    { opacity: 0; }
+  100%   { opacity: 0; }
+}
+
+/* 标题轻微呼吸（展示期间更明显） */
+#宇宙大事件一览 + ul > li strong {
+  animation: swTitlePulse 1.6s infinite ease-in-out;
+}
+
+@keyframes swTitlePulse {
+  0%   { text-shadow: 0 0 10px var(--saber-color); }
+  50%  { text-shadow: 0 0 24px var(--saber-color); }
+  100% { text-shadow: 0 0 10px var(--saber-color); }
+}
+
+/* 兼容不支持 color-mix：退化阴影 */
+@supports not (color-mix(in srgb, #000 0%, #000 100%)) {
+  #宇宙大事件一览 + ul > li::after {
+    box-shadow: 0 0 22px var(--saber-color), 0 0 44px rgba(15, 23, 42, 0.9);
+  }
+}
+
+/* =====================================================
+   FIX：恢复“阵营标识圆点”（与图二完全一致）
+   ===================================================== */
+
+/* 顶部阵营圆点 */
+#宇宙大事件一览 + ul > li::marker {
+  display: none;
+}
+
+/* 使用额外的背景层画圆点（不占用 ::before / ::after） */
+#宇宙大事件一览 + ul > li {
+  background-image:
+    radial-gradient(
+      circle at 50% 12%,
+      var(--saber-color) 0,
+      var(--saber-color) 5px,
+      transparent 6px
+    );
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+
+/* 顶部阵营点：中等尺寸（比原来大一点，不夸张） */
+#宇宙大事件一览 + ul > li {
+  background-image:
+    radial-gradient(
+      circle at 50% 12%,
+      var(--saber-color) 0,
+      var(--saber-color) 7px,
+      transparent 7px
+    );
+}
+/* =====================================================
+   ENHANCE：卡片四周能量场（图一风格）
+   ===================================================== */
+
+#宇宙大事件一览 + ul > li {
+  /* 允许多层能量叠加 */
+  box-shadow:
+    0 0 18px color-mix(in srgb, var(--saber-color) 35%, transparent),
+    0 0 36px color-mix(in srgb, var(--saber-color) 25%, transparent),
+    inset 0 0 18px color-mix(in srgb, var(--saber-color) 20%, transparent);
+}
+
+/* 角落增强（让边缘更“包”） */
+#宇宙大事件一览 + ul > li::after {
+  box-shadow:
+    0 0 22px var(--saber-color),
+    0 0 44px color-mix(in srgb, var(--saber-color) 85%, transparent),
+    0 0 72px color-mix(in srgb, var(--saber-color) 55%, transparent);
+}
+
+/* =====================================================
+   FIX：轮播上下收窄（真正生效版）
+   ===================================================== */
+
+/* 桌面端：压缩整体高度 */
+@media (min-width: 769px) {
+  #宇宙大事件一览 + ul {
+    min-height: 200px !important;   /* ← 原来 240px */
+  }
+
+  #宇宙大事件一览 + ul > li {
+    padding: 1.4rem 2.4rem 2.0rem !important;
+  }
+}
+
+/* 移动端：同步压缩 */
+@media (max-width: 768px) {
+  #宇宙大事件一览 + ul {
+    min-height: 32vh !important;    /* ← 原来 32vh */
+  }
+
+  #宇宙大事件一览 + ul > li {
+    padding: 1.2rem 1.6rem 1.8rem !important;
+  }
+}
+/* =====================================================
+   FIX：宇宙大事件轮播 · 手机端显示修复
+   ===================================================== */
+@media (max-width: 768px) {
+
+  /* 父容器高度回归合理比例 */
+  #宇宙大事件一览 + ul {
+    min-height: 42vh !important;
+  }
+
+  /* 卡片：取消左右百分比压缩，改为居中安全宽度 */
+  #宇宙大事件一览 + ul > li {
+    left: 6% !important;
+    right: 6% !important;
+    top: 0;
+
+    padding: 1.4rem 1.4rem 1.8rem !important;
+    border-radius: 18px;
+
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  /* 标题不要过大，避免断行 */
+  #宇宙大事件一览 + ul > li strong {
+    font-size: 1.5rem !important;
+    line-height: 1.3;
+  }
+
+  /* 正文宽度必须 100%，否则会一字一行 */
+  #宇宙大事件一览 + ul > li p {
+    max-width: 100% !important;
+  }
+
+  /* 年代行略收紧 */
+  #宇宙大事件一览 + ul > li p:last-child {
+    font-size: 1.05rem;
+    margin-top: 0.6rem;
+  }
+}
+/* =====================================================
+   FIX：手机端轮播上下收窄（仅高度）
+   ===================================================== */
+@media (max-width: 768px) {
+
+  /* 父容器高度略降 */
+  #宇宙大事件一览 + ul {
+    min-height: 36vh !important;   /* 原来 42vh */
+  }
+
+  /* 卡片上下 padding 收紧 */
+  #宇宙大事件一览 + ul > li {
+    padding-top: 1.1rem !important;
+    padding-bottom: 1.4rem !important;
+  }
+}
+

@@ -1,0 +1,158 @@
+/* =========================================
+   styles/sw-components.css  (卡片/图片/代码/表格/链接/滚动条)
+   ========================================= */
+.vp-doc img {
+  border-radius: 10px;
+  box-shadow: 0 0 18px rgba(15, 23, 42, 0.9);
+}
+
+/* 通用信息卡 */
+.sw-card {
+  position: relative;
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin: 18px 0;
+  background: rgba(56, 189, 248, 0.05);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: inset 0 0 20px rgba(56, 189, 248, 0.05);
+  backdrop-filter: blur(4px);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  color: #e5e7eb;
+}
+
+.sw-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+    linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.06),
+      rgba(0, 255, 0, 0.02),
+      rgba(0, 0, 255, 0.06)
+    );
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sw-card:hover {
+  border-color: rgba(56, 189, 248, 0.8);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.3),
+    inset 0 0 20px rgba(56, 189, 248, 0.1);
+  transform: translateY(-2px);
+}
+
+.sw-warning {
+  border-left: 4px solid #fde047;
+  padding: 10px 14px;
+  margin: 14px 0;
+  background: rgba(250, 204, 21, 0.08);
+  border-radius: 10px;
+}
+
+.sw-info {
+  border-left: 4px solid #38bdf8;
+  padding: 10px 14px;
+  margin: 14px 0;
+  background: rgba(56, 189, 248, 0.08);
+  border-radius: 10px;
+}
+
+/* 代码块：帝国终端 */
+.vp-doc pre {
+  background-color: #0f172a !important;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  position: relative;
+}
+
+.vp-doc pre::before {
+  content: "●  ●  ●";
+  display: block;
+  font-size: 10px;
+  color: #475569;
+  padding: 8px 12px;
+  background: #1e293b;
+  border-radius: 8px 8px 0 0;
+  margin-bottom: 8px;
+  letter-spacing: 4px;
+}
+
+:not(pre) > code {
+  color: #7dd3fc !important;
+  background-color: rgba(14, 165, 233, 0.15) !important;
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-family: "Courier New", monospace;
+}
+
+/* 表格：终端数据网格 */
+.vp-doc table {
+  background: rgba(15, 23, 42, 0.4);
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+.vp-doc th {
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--vp-c-brand-light);
+  font-family: "StarJedi", sans-serif;
+  text-transform: uppercase;
+  padding: 12px 15px;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  letter-spacing: 1px;
+}
+
+.vp-doc td {
+  padding: 10px 15px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: #e5e7eb;
+}
+
+.vp-doc tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.vp-doc tr:hover {
+  background-color: rgba(56, 189, 248, 0.08);
+  transition: background-color 0.3s;
+}
+
+/* 正文链接：片头黄（不影响导航/侧栏） */
+.vp-doc a {
+  color: #fde047;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(253, 224, 71, 0.5);
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.vp-doc a:hover {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(253, 224, 71, 0.8);
+  border-bottom: 1px solid #fde047;
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #020617;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0ea5e9, #38bdf8);
+  border-radius: 5px;
+  border: 2px solid #020617;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #fff;
+  box-shadow: 0 0 10px #38bdf8;
+}

@@ -1,0 +1,53 @@
+/* =========================================
+   styles/sw-base.css  (深色底 + 星空背景 + 动画)
+   ========================================= */
+html {
+  background-color: #020617 !important;
+}
+
+.dark {
+  background-color: #020617 !important;
+  --vp-c-bg: #020617;
+  --vp-c-bg-soft: #020617;
+  --vp-c-bg-alt: #020617;
+  --vp-c-text: #e5e7eb;
+}
+
+/* 星空背景：只在 dark 下给 body */
+.dark body {
+  background-color: #000;
+  background-image:
+    radial-gradient(white, rgba(255, 255, 255, 0.2) 2px, transparent 3px),
+    radial-gradient(white, rgba(255, 255, 255, 0.15) 1px, transparent 2px),
+    radial-gradient(white, rgba(255, 255, 255, 0.1) 2px, transparent 3px);
+  background-size: 550px 550px, 350px 350px, 250px 250px;
+  background-position: 0 0, 40px 60px, 130px 270px;
+  animation: star-move 60s linear infinite;
+}
+
+@keyframes star-move {
+  from {
+    background-position: 0 0, 40px 60px, 130px 270px;
+  }
+  to {
+    background-position: 550px 550px, 390px 410px, 380px 520px;
+  }
+}
+
+/* 页面淡入 */
+.VPContent {
+  animation: fadeInSpace 0.8s ease-out;
+}
+
+@keyframes fadeInSpace {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateZ(-50px);
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+    filter: blur(0);
+  }
+}

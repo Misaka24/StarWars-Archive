@@ -1,8 +1,6 @@
 import DefaultTheme from 'vitepress/theme'
 import type { EnhanceAppContext } from 'vitepress'
-import './style.css'
-import './sidebar-float.css'
-import './scanline.css'
+import './styles/style.css'
 
 export default {
   ...DefaultTheme,

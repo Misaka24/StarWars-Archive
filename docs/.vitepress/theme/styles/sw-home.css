@@ -1,0 +1,256 @@
+/* =========================================
+   styles/sw-home.css  (首页 Hero / 按钮 / Features / Intro Card)
+   ========================================= */
+.VPHomeHero {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 64px;
+  background:
+    radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 60%),
+    radial-gradient(circle at bottom, rgba(59, 130, 246, 0.12), transparent 60%);
+}
+
+.VPHomeHero::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(248, 250, 252, 0.25) 1px,
+    transparent 0
+  );
+  background-size: 40px 40px;
+  opacity: 0.35;
+}
+
+.VPHomeHero .image {
+  filter: drop-shadow(0 0 24px rgba(56, 189, 248, 0.7));
+}
+
+/* 终极光剑按钮：只命中第一个 brand */
+.VPHomeHero .actions .VPButton.brand:first-child {
+  position: relative;
+  background: transparent !important;
+  color: var(--saber-color) !important;
+  border: 2px solid var(--saber-color);
+  border-radius: 999px;
+  padding: 12px 32px;
+  font-family: "StarJedi", sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  text-transform: lowercase;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 1;
+  overflow: visible;
+  box-shadow: 0 0 5px var(--saber-glow), inset 0 0 10px var(--saber-glow);
+  text-shadow: 0 0 8px var(--saber-glow);
+}
+
+.VPHomeHero .actions .VPButton.brand:first-child:hover {
+  background: var(--saber-color) !important;
+  color: var(--saber-core) !important;
+  border-color: var(--saber-core);
+  transform: scale(1.05) translateY(-2px);
+  box-shadow:
+    0 0 10px var(--saber-core),
+    0 0 30px var(--saber-color),
+    0 0 60px var(--saber-color),
+    0 0 100px var(--saber-glow);
+  text-shadow: none;
+  animation: saber-hum 0.1s infinite alternate;
+}
+
+.VPHomeHero .actions .VPButton.brand:first-child::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 60%);
+  opacity: 0;
+  transform: scale(0.1);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+
+.VPHomeHero .actions .VPButton.brand:first-child:hover::before {
+  opacity: 0.15;
+  transform: scale(1);
+}
+
+@keyframes saber-hum {
+  from {
+    box-shadow: 0 0 10px var(--saber-core), 0 0 30px var(--saber-color),
+      0 0 60px var(--saber-color);
+  }
+  to {
+    box-shadow: 0 0 12px var(--saber-core), 0 0 35px var(--saber-color),
+      0 0 70px var(--saber-color);
+  }
+}
+
+/* 另一个按钮保持克制 */
+.VPHomeHero .actions .VPButton:not(.brand:first-child) {
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: rgba(15, 23, 42, 0.8);
+}
+
+/* Features 卡片增强 */
+.VPHomeFeatures .VPFeature {
+  background-color: rgba(10, 20, 40, 0.7);
+  border: 1px solid rgba(0, 150, 255, 0.3);
+  box-shadow: 0 0 5px rgba(0, 150, 255, 0.2);
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.VPHomeFeatures .VPFeature:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(0, 150, 255, 0.5), 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.VPHomeFeatures .VPFeature h2 {
+  color: #90e0ff;
+}
+
+/* Intro Card（玻璃 HUD） */
+.sw-intro-card {
+  position: relative;
+  max-width: 860px;
+  margin: 1.2rem auto 0;
+  padding: 2.4rem 2.6rem;
+  border-radius: 16px;
+  line-height: 1.9;
+  font-size: 1.13rem;
+  color: var(--vp-c-text-1);
+  overflow: hidden;
+
+  background: rgba(20, 28, 45, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 150, 255, 0.25);
+  box-shadow: 0 0 18px rgba(0, 120, 255, 0.18),
+    inset 0 0 12px rgba(0, 150, 255, 0.12);
+}
+
+.sw-intro-card.sw-advanced::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(
+    120deg,
+    rgba(0, 150, 255, 0.45),
+    rgba(0, 120, 255, 0.25),
+    rgba(0, 150, 255, 0.45)
+  );
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  animation: borderFlowMedium 4s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes borderFlowMedium {
+  0% {
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  50% {
+    filter: hue-rotate(15deg) brightness(1.4);
+  }
+  100% {
+    filter: hue-rotate(0deg) brightness(1);
+  }
+}
+
+.sw-intro-card.sw-advanced::after {
+  content: "";
+  position: absolute;
+  width: 140%;
+  height: 140%;
+  top: -20%;
+  left: -20%;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(0, 180, 255, 0.35) 0%, transparent 70%),
+    radial-gradient(circle at 88% 14%, rgba(0, 180, 255, 0.32) 0%, transparent 70%),
+    radial-gradient(circle at 14% 88%, rgba(0, 180, 255, 0.32) 0%, transparent 70%),
+    radial-gradient(circle at 86% 86%, rgba(0, 180, 255, 0.35) 0%, transparent 70%);
+  opacity: 0.22;
+  animation: hudPulseSoft 5s ease-in-out infinite;
+}
+
+@keyframes hudPulseSoft {
+  0%,
+  100% {
+    opacity: 0.18;
+  }
+  50% {
+    opacity: 0.28;
+  }
+}
+/* -----------------------------
+           轮播字体修复
+   - 标题（strong）与年份（BBY/ABY）用 StarJedi
+   - 说明正文用系统字体
+   ----------------------------- */
+#宇宙大事件一览 + ul > li {
+  /* 轮播正文：用可显示中文的字体 */
+  font-family: var(--vp-font-family-base) !important;
+  letter-spacing: 0.02em;
+}
+
+#宇宙大事件一览 + ul > li strong {
+  /* 标题：强制 StarJedi */
+  font-family: "StarJedi", var(--vp-font-family-base) !important;
+  letter-spacing: 0.06em;
+}
+
+/* 年份那一行（你当前用的是 p:last-child）强制 StarJedi */
+#宇宙大事件一览 + ul > li p:last-child {
+  font-family: "StarJedi", var(--vp-font-family-base) !important;
+  letter-spacing: 0.08em;
+}
+/* =======================================
+            移除标题上方的分隔线
+   ======================================= */
+
+/* 所有标题，禁止任何伪元素画线 */
+.vp-doc h1::before,
+.vp-doc h2::before,
+.vp-doc h3::before,
+.vp-doc h1::after,
+.vp-doc h2::after,
+.vp-doc h3::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* 禁止标题自身携带边框线 */
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3 {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+/* =====================================
+   标题裁切 + 断行修复
+   ===================================== */
+
+/* 中文标题防裁切 */
+.vp-doc h1,
+.VPHomeHero .name {
+  line-height: 1.25 !important;
+  padding-bottom: 0.2em;
+  overflow: visible !important;
+}
+
+/* 首页中文标题防断行 */
+.VPHome .vp-doc h1 {
+  letter-spacing: normal !important;
+  word-break: keep-all;
+}

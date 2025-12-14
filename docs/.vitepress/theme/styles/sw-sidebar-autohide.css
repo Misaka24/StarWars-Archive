@@ -1,0 +1,42 @@
+/* =========================================
+   styles/sw-sidebar-autohide.css  (侧边栏 hover 自动展开：可选)
+   注意：这会改变布局模型，若你后续又写 JS trigger zone，请二选一
+   ========================================= */
+.VPDoc {
+  position: relative;
+}
+
+/* 默认收起 */
+.VPDoc .VPSidebar {
+  width: 0 !important;
+  opacity: 0;
+  overflow: hidden;
+  transition: width 0.25s ease, opacity 0.25s ease;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 20;
+}
+
+/* Hover 展开 */
+.VPDoc:hover .VPSidebar {
+  width: 220px !important;
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+}
+
+/* 正文跟随右移 */
+.VPDoc .VPContent {
+  transition: margin-left 0.25s ease;
+  margin-left: 0 !important;
+}
+
+.VPDoc:hover .VPContent {
+  margin-left: 220px !important;
+}
+
+.VPSidebarItem .text {
+  white-space: nowrap;
+}

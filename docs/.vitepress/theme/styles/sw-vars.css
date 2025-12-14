@@ -1,0 +1,35 @@
+/* =========================================
+   styles/sw-vars.css  (字体 + 变量 + 配色)
+   ========================================= */
+@font-face {
+  font-family: "StarJedi";
+  src: url("/fonts/StarJedi.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  --vp-font-family-base: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont,
+    "Helvetica Neue", Arial, sans-serif;
+
+  /* Brand */
+  --vp-c-brand: #38bdf8;
+  --vp-c-brand-light: #7dd3fc;
+  --vp-c-brand-dark: #0ea5e9;
+
+  /* Saber */
+  --saber-color: #38bdf8;
+  --saber-core: #ffffff;
+  --saber-glow: rgba(56, 189, 248, 0.6);
+
+  /* Layout */
+  --vp-layout-max-width: 1400px;
+
+  /* 强制顶栏/正文色系稳定（避免 hover/滚动跳色） */
+  --vp-c-text-1: #cbd5e1;
+  --vp-c-text-2: #cbd5e1;
+  --vp-c-text-3: #cbd5e1;
+}
+
+:root {
+  color-scheme: dark;
+}
