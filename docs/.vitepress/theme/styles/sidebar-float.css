@@ -41,7 +41,7 @@
 }
 
 /* ===============================
-   正文容器布局调整（关键）
+   正文容器布局调整
    =============================== */
 
 /* 默认正文：留出侧栏空间 */
@@ -60,10 +60,8 @@
   padding-left: var(--sidebar-width);
 }
 
-/* 右侧栏（VPDocAside）不受任何影响 */
-
 /* ===============================
-   方案一（加长 + 稍增强）：侧栏呼吸提示
+           侧栏呼吸提示
    =============================== */
 
 .sidebar-trigger-zone::after {
@@ -96,8 +94,11 @@
     opacity: 0.14;
   }
 }
-
 /* 展开后关闭提示 */
 .sidebar-open .sidebar-trigger-zone::after {
   display: none;
+}
+/* 首页不显示侧边栏呼吸提示 */
+body.is-home .sidebar-trigger-zone::after {
+  display: none !important;
 }
