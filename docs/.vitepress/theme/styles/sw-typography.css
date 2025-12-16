@@ -10,6 +10,10 @@
   margin-top: 3rem;
   margin-bottom: 2rem;
 
+  text-align: center;        
+  margin-left: auto;          
+  margin-right: auto;
+
   background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -94,7 +98,7 @@
 }
 
 /* =====================================================
-   FINAL FIX：彻底禁止 H1 图标（不留任何余地）
+                       禁止 H1 图标
    ===================================================== */
 
 /* 禁止 H1 本体的所有伪元素 */
@@ -118,7 +122,7 @@
   display: none !important;
 }
 /* =====================================================
-   FIX：黄线之间的 blockquote 内容居中（仅 CSS）
+             黄线之间的 blockquote 内容居中
    ===================================================== */
 
 /* 整个引用块作为居中容器 */

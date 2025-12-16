@@ -3,8 +3,9 @@
    =============================== */
 
 :root {
-  --sidebar-width: 260px;
-  --sidebar-hidden-offset: calc(-1 * (var(--sidebar-width) - 8px));
+  /* 用 VitePress 自带变量兜底，避免不同断点下侧栏宽度变化导致偏移不够 */
+  --sidebar-width: var(--vp-sidebar-width, 260px);
+  --sidebar-peek: 8px; /* 触发条可见宽度 */
 }
 
 /* 固定侧栏，不占文档流 */
@@ -24,14 +25,14 @@
   position: fixed;
   left: 0;
   top: 0;
-  width: 8px;
+  width: var(--sidebar-peek);
   height: 100vh;
   z-index: 40;
 }
 
-/* 收起状态 */
+/* 收起状态：按自身宽度 -100% 收起，只保留 8px 触发条 */
 .sidebar-auto-hide .VPSidebar {
-  transform: translateX(var(--sidebar-hidden-offset));
+  transform: translateX(calc(-100% + var(--sidebar-peek)));
 }
 
 /* 展开状态 */
@@ -60,3 +61,43 @@
 }
 
 /* 右侧栏（VPDocAside）不受任何影响 */
+
+/* ===============================
+   方案一（加长 + 稍增强）：侧栏呼吸提示
+   =============================== */
+
+.sidebar-trigger-zone::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 260px; /* 呼吸条明显加长 */
+  transform: translateY(-50%);
+  background: linear-gradient(
+    to right,
+    rgba(120,180,255,0.85),
+    rgba(120,180,255,0.35),
+    rgba(120,180,255,0)
+  );
+  pointer-events: none;
+  animation: sidebar-hint-breathe-long 6.2s ease-in-out infinite;
+}
+
+/* 幅度稍微拉大，但不刺眼 */
+@keyframes sidebar-hint-breathe-long {
+  0% {
+    opacity: 0.14;   /* 比之前略亮一点 */
+  }
+  50% {
+    opacity: 0.72;   /* 峰值小幅提高 */
+  }
+  100% {
+    opacity: 0.14;
+  }
+}
+
+/* 展开后关闭提示 */
+.sidebar-open .sidebar-trigger-zone::after {
+  display: none;
+}

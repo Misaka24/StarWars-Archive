@@ -1,6 +1,5 @@
 /* =========================================
    styles/sw-sidebar-autohide.css  (侧边栏 hover 自动展开：可选)
-   注意：这会改变布局模型，若你后续又写 JS trigger zone，请二选一
    ========================================= */
 .VPDoc {
   position: relative;
