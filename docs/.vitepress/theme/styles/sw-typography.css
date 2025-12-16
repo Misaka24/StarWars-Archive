@@ -1,8 +1,7 @@
 /* =========================================
    styles/sw-typography.css  (正文排版 + 标题体系)
    ========================================= */
-.vp-doc h1,
-.VPHomeHero .name {
+.vp-doc h1 {
   font-family: "StarJedi", var(--vp-font-family-base);
   letter-spacing: 1.6px;
   text-transform: uppercase;
@@ -145,5 +144,27 @@
 .vp-doc blockquote i {
   display: inline-block;
   text-align: center;
+}
+
+/* =====================================================
+             单独控制index页h1标题样式
+   ===================================================== */
+
+.VPHomeHero .name {
+  font-family: "StarJedi", var(--vp-font-family-base);
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  font-size: 3rem;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+
+  /* 不要写 text-align / margin-left / margin-right */
+
+  background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.4));
 }
 
