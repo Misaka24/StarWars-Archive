@@ -102,3 +102,20 @@
 body.is-home .sidebar-trigger-zone::after {
   display: none !important;
 }
+/* =========================================
+   终极修复：彻底移除大屏左右留白（VitePress 变量级）
+   ========================================= */
+
+@media (min-width: 960px) {
+  :root {
+    /* 整体布局最大宽度 */
+    --vp-layout-max-width: 100% !important;
+
+    /* 顶部导航最大宽度 */
+    --vp-nav-max-width: 100% !important;
+
+    /* 文档正文最大宽度 */
+    --vp-doc-max-width: 100% !important;
+  }
+}
+
