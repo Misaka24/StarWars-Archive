@@ -1,4 +1,13 @@
 import { defineConfig } from 'vitepress'
+import { RssPlugin, type RSSOptions } from 'vitepress-plugin-rss'
+
+const baseUrl = 'https://sgqy.top'
+
+const RSS: RSSOptions = {
+  title: '星球大战资料站',
+  baseUrl,
+  copyright: '© 2025 SGQY Project. All Rights Reserved.'
+}
 
 export default defineConfig({
   lang: 'zh-CN',
@@ -25,8 +34,27 @@ export default defineConfig({
         gtag('js', new Date());
         gtag('config', 'G-LQ6PY0WS11');
       `
+    ],
+
+    // ===============================
+    // RSS 声明
+    // ===============================
+    [
+      'link',
+      {
+        rel: 'alternate',
+        type: 'application/rss+xml',
+        title: 'RSS',
+        href: '/rss.xml'
+      }
     ]
   ],
+
+  vite: {
+    plugins: [
+      RssPlugin(RSS)
+    ]
+  },
 
   themeConfig: {
     logo: '/logo.svg',
@@ -37,40 +65,47 @@ export default defineConfig({
       message: 'May the Force Be With You. | 星球大战资料站',
       copyright: '© 2025 SGQY Project. All Rights Reserved.'
     },
-    
+
+     socialLinks: [
+      {
+        icon: 'github',
+        link: 'https://github.com/Misaka24/WEB'
+      }
+    ],
+
     // ===============================
     // 本地搜索配置(汉化)
     // ===============================
-     search: {
-     provider: 'local',
-     options: {
-       locales: {
-         root: {
-           translations: {
-             button: {
-               buttonText: '搜索',
-               buttonAriaLabel: '搜索'
-             },
-             modal: {
-               displayDetails: '显示详细列表',
-               resetButtonTitle: '重置搜索',
-               backButtonTitle: '关闭搜索',
-               noResultsText: '没有结果',
-               footer: {
-                 selectText: '选择',
-                 selectKeyAriaLabel: '输入',
-                 navigateText: '导航',
-                 navigateUpKeyAriaLabel: '上箭头',
-                 navigateDownKeyAriaLabel: '下箭头',
-                 closeText: '关闭',
-                 closeKeyAriaLabel: 'Esc'
-               }
-             }
-           }
-         }
-       }
-     }
-   },
+    search: {
+      provider: 'local',
+      options: {
+        locales: {
+          root: {
+            translations: {
+              button: {
+                buttonText: '搜索',
+                buttonAriaLabel: '搜索'
+              },
+              modal: {
+                displayDetails: '显示详细列表',
+                resetButtonTitle: '重置搜索',
+                backButtonTitle: '关闭搜索',
+                noResultsText: '没有结果',
+                footer: {
+                  selectText: '选择',
+                  selectKeyAriaLabel: '输入',
+                  navigateText: '导航',
+                  navigateUpKeyAriaLabel: '上箭头',
+                  navigateDownKeyAriaLabel: '下箭头',
+                  closeText: '关闭',
+                  closeKeyAriaLabel: 'Esc'
+                }
+              }
+            }
+          }
+        }
+      }
+    },
 
     // ===============================
     // 顶部导航栏
