@@ -1,0 +1,107 @@
+name: Deploy StarWars Archive (3 Modes)
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout（需要最近两次 commit）
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      # 2️⃣ Detect deploy mode
+      - name: Detect deploy mode
+        id: mode
+        shell: bash
+        run: |
+          CHANGED=$(git diff --name-only HEAD~1 HEAD || true)
+          echo "Changed files:"
+          echo "$CHANGED"
+
+          MODE="none"
+
+          if echo "$CHANGED" | grep -q '^rawsite/'; then
+            MODE="rawsite"
+          elif echo "$CHANGED" | grep -q '^docs/'; then
+            MODE="docs"
+          fi
+
+          echo "deploy_mode=$MODE" >> $GITHUB_OUTPUT
+
+          if [ "$MODE" = "none" ]; then
+            echo "No deployable changes."
+            exit 0
+          fi
+
+      # 3️⃣ Build VitePress（docs 模式）
+      - name: Setup Node
+        if: steps.mode.outputs.deploy_mode == 'docs'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build VitePress
+        if: steps.mode.outputs.deploy_mode == 'docs'
+        shell: bash
+        run: |
+          cd docs
+          npm ci
+          npm run docs:build
+
+      # 4️⃣ docs：上传 dist → 临时目录（🔥 修复目录叠加）
+      - name: Upload docs dist to tmp
+        if: steps.mode.outputs.deploy_mode == 'docs'
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          key: ${{ secrets.DEPLOY_KEY }}
+
+          source: "docs/.vitepress/dist/**"
+          target: "/tmp/starwars-archive-deploy"
+
+          strip_components: 3   # ⭐ docs/.vitepress/dist → 平铺
+          rm: true
+
+      # 5️⃣ rawsite：上传原生站点 → 临时目录
+      - name: Upload rawsite to tmp
+        if: steps.mode.outputs.deploy_mode == 'rawsite'
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          key: ${{ secrets.DEPLOY_KEY }}
+
+          source: "rawsite/**"
+          target: "/tmp/starwars-archive-deploy"
+
+          strip_components: 1   # ⭐ 去掉 rawsite/
+          rm: true
+
+      # 6️⃣ 统一发布到站点根目录（你已经验证成功的方案）
+      - name: Publish to web root
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          script: |
+            set -e
+
+            mkdir -p /var/www/starwars-archive
+
+            rsync -a --delete \
+              /tmp/starwars-archive-deploy/ \
+              /var/www/starwars-archive/
+
+            chmod -R 755 /var/www/starwars-archive
