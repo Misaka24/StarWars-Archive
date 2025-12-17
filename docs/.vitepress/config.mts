@@ -1,6 +1,4 @@
-console.log("CUSTOM THEME LOADED!");
-
-import { defineConfig } from 'vitepress';
+import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   lang: 'zh-CN',
@@ -8,7 +6,26 @@ export default defineConfig({
   description: '星球大战世界观、原力、势力、时间线与观看顺序的中文入门资料站。',
 
   head: [
-    ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg+xml' }]
+    // 网站图标
+    ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg+xml' }],
+
+    // ===============================
+    // Google Analytics
+    // ===============================
+    [
+      'script',
+      { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-LQ6PY0WS11' }
+    ],
+    [
+      'script',
+      {},
+      `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-LQ6PY0WS11');
+      `
+    ]
   ],
 
   themeConfig: {
@@ -30,7 +47,6 @@ export default defineConfig({
       { text: '原力与绝地 / 西斯', link: '/universe/force' },
       { text: '派系与势力', link: '/universe/factions' },
       { text: '时间线', link: '/universe/timeline' },
-
       {
         text: '资料库',
         items: [
@@ -50,7 +66,6 @@ export default defineConfig({
     // 全站侧边栏
     // ===============================
     sidebar: [
-      // --- 世界观 ---
       {
         text: '世界观',
         collapsed: false,
@@ -61,8 +76,6 @@ export default defineConfig({
           { text: '时间线', link: '/universe/timeline' }
         ]
       },
-
-      // --- 资料库 ---
       {
         text: '资料库',
         collapsed: false,
@@ -76,7 +89,6 @@ export default defineConfig({
               { text: '西斯人物大系', link: '/database/characters/sith' }
             ]
           },
-
           { text: '星球与地点', link: '/database/locations' },
           { text: '武器与装备', link: '/database/weapons' },
           { text: '舰船与载具', link: '/database/ships' },
@@ -88,4 +100,4 @@ export default defineConfig({
       }
     ]
   }
-});
+})
