@@ -37,6 +37,10 @@ export default defineConfig({
       message: 'May the Force Be With You. | 星球大战资料站',
       copyright: '© 2025 SGQY Project. All Rights Reserved.'
     },
+    
+    search: {
+    provider: 'local'
+     },
 
     // ===============================
     // 顶部导航栏
