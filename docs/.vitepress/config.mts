@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 import { RssPlugin, type RSSOptions } from 'vitepress-plugin-rss'
 
-const baseUrl = 'https://sgqy.top'
+const baseUrl = 'http://sgqy.top'
 
 const RSS: RSSOptions = {
   title: '星球大战资料站',
