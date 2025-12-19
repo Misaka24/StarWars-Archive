@@ -1,10 +1,10 @@
 # 仓库和网站特点 
 ## 仓库  
 ### 自动部署 
-~~使用Webhook加服务器自动部署脚本实现初步自动部署：本地编写代码，预览→推送到远端Github仓库→自动触发Webhook→服务器自动拉取资源并部署~~   
-改为使用 **Github Actions** 实现自动部署
+- ~~使用Webhook加服务器自动部署脚本实现初步自动部署：本地编写代码，预览→推送到远端Github仓库→自动触发Webhook→服务器自动拉取资源并部署~~   
+- 改为使用 **Github Actions** 实现自动部署
 ### 网站评论仓库
-- 使用Giscus实现网站评论功能，评论内容存储在[StarWars-Archive-Comments](https://github.com/Misaka24/StarWars-Archive-Comments)仓库的Discussions中
+- 使用Giscus实现网站评论功能，评论内容存储在[StarWars-Archive-Comments](https://github.com/Misaka24/StarWars-Archive-Comments/discussions)仓库的Discussions中
 ## 网站
 ### 内容
 - 主要内容为StarWars相关资料，包括世界观和各类资料等

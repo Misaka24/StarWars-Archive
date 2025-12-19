@@ -1,8 +1,6 @@
 # Source Code Repository for [StarWars 资料站](http://sgqy.top)
 
-**For 殷方言老师：Please read the sections below carefully before reviewing or grading.**
-
----
+***For 殷方言老师：Please read the sections below carefully before reviewing or grading.***
 
 ## Deployment
 - This website is automatically deployed by GitHub Actions when the code is pushed to this repository.
