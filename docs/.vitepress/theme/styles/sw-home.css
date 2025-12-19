@@ -1,5 +1,5 @@
 /* =========================================
-   styles/sw-home.css  (首页 Hero / 按钮 / Features / Intro Card)
+   styles/sw-home.css  (首页样式控制)
    ========================================= */
 .VPHomeHero {
   position: relative;
@@ -28,7 +28,7 @@
   filter: drop-shadow(0 0 24px rgba(56, 189, 248, 0.7));
 }
 
-/* 终极光剑按钮：只命中第一个 brand */
+/* 光剑按钮 */
 .VPHomeHero .actions .VPButton.brand:first-child {
   position: relative;
   background: transparent !important;
@@ -91,14 +91,13 @@
   }
 }
 
-/* 另一个按钮保持克制 */
 .VPHomeHero .actions .VPButton:not(.brand:first-child) {
   border-radius: 999px;
   border: 1px solid rgba(148, 163, 184, 0.5);
   background: rgba(15, 23, 42, 0.8);
 }
 
-/* Features 卡片增强 */
+/* Features 卡片 */
 .VPHomeFeatures .VPFeature {
   background-color: rgba(10, 20, 40, 0.7);
   border: 1px solid rgba(0, 150, 255, 0.3);
@@ -116,7 +115,7 @@
   color: #90e0ff;
 }
 
-/* Intro Card（玻璃 HUD） */
+/* 介绍卡片 */
 .sw-intro-card {
   position: relative;
   max-width: 860px;
@@ -127,7 +126,6 @@
   font-size: 1.13rem;
   color: var(--vp-c-text-1);
   overflow: hidden;
-
   background: rgba(20, 28, 45, 0.4);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(0, 150, 255, 0.25);
@@ -199,25 +197,19 @@
    - 说明正文用系统字体
    ----------------------------- */
 #宇宙大事件一览 + ul > li {
-  /* 轮播正文：用可显示中文的字体 */
   font-family: var(--vp-font-family-base) !important;
   letter-spacing: 0.02em;
 }
 
 #宇宙大事件一览 + ul > li strong {
-  /* 标题：强制 StarJedi */
   font-family: "StarJedi", var(--vp-font-family-base) !important;
   letter-spacing: 0.06em;
 }
 
-/* 年份那一行（你当前用的是 p:last-child）强制 StarJedi */
 #宇宙大事件一览 + ul > li p:last-child {
   font-family: "StarJedi", var(--vp-font-family-base) !important;
   letter-spacing: 0.08em;
 }
-/* =======================================
-            移除标题上方的分隔线
-   ======================================= */
 
 /* 所有标题，禁止任何伪元素画线 */
 .vp-doc h1::before,
@@ -237,9 +229,6 @@
   border-top: none !important;
   border-bottom: none !important;
 }
-/* =====================================
-   标题裁切 + 断行修复
-   ===================================== */
 
 /* 中文标题防裁切 */
 .vp-doc h1,
@@ -253,4 +242,242 @@
 .VPHome .vp-doc h1 {
   letter-spacing: normal !important;
   word-break: keep-all;
+}
+
+/* =====================================
+   迁移index.md中所有样式控制于此
+   ===================================== */
+
+/* 背景星空粒子层 */
+.sw-starfield {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.22) 0, transparent 40%),
+    radial-gradient(circle at 80% 10%, rgba(56,189,248,0.18) 0, transparent 45%),
+    radial-gradient(circle at 10% 80%, rgba(59,130,246,0.24) 0, transparent 50%),
+    #020617;
+  overflow: hidden;
+}
+
+.sw-starfield::before,
+.sw-starfield::after {
+  content: "";
+  position: absolute;
+  inset: -200px;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.75) 0, transparent 40%),
+    radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.55) 0, transparent 40%),
+    radial-gradient(1px 1px at 70% 10%, rgba(255,255,255,0.65) 0, transparent 40%),
+    radial-gradient(1px 1px at 90% 70%, rgba(255,255,255,0.7) 0, transparent 40%),
+    radial-gradient(1px 1px at 30% 50%, rgba(148,163,184,0.8) 0, transparent 40%);
+  animation: swStarDrift 120s linear infinite;
+  opacity: 0.9;
+}
+
+.sw-starfield::after {
+  animation-duration: 160s;
+  opacity: 0.6;
+}
+
+@keyframes swStarDrift {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(180px, -240px, 0); }
+}
+
+/* 视频预览区块 */
+.sw-video-section {
+  margin: 3rem 0 2.5rem;
+}
+
+.sw-video-hero {
+  display: block;
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  text-decoration: none;
+  background:
+    linear-gradient(135deg, rgba(56,189,248,0.4), rgba(15,23,42,0.95)),
+    url('/images/hero-space-bg.jpg') center/cover no-repeat;
+  min-height: 220px;
+  box-shadow: 0 18px 40px rgba(15,23,42,0.7);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.sw-video-hero:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 60px rgba(15,23,42,0.9);
+}
+
+.sw-video-overlay {
+  position: relative;
+  inset: 0;
+  padding: 2.2rem 2.4rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: radial-gradient(circle at 10% 0%, rgba(15,23,42,0.4) 0, transparent 55%);
+}
+
+.sw-video-play {
+  width: 70px;
+  height: 70px;
+  border-radius: 999px;
+  border: 2px solid rgba(248,250,252,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 18px rgba(248,250,252,0.55);
+  position: relative;
+}
+
+.sw-video-play::before {
+  content: "";
+  border-style: solid;
+  border-width: 11px 0 11px 18px;
+  border-color: transparent transparent transparent rgba(248,250,252,0.95);
+  margin-left: 4px;
+}
+
+.sw-video-play::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  border: 1px solid rgba(248,250,252,0.3);
+  animation: swPulse 1.8s ease-out infinite;
+}
+
+@keyframes swPulse {
+  0% { opacity: 0.7; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.35); }
+}
+
+.sw-video-text h2 {
+  margin: 0 0 0.4rem !important;
+  font-size: 1.5rem;
+  border: none;
+}
+
+.sw-video-text p {
+  margin: 0 0 0.5rem;
+  opacity: 0.9;
+}
+
+/* 时间线横条 */
+.sw-timeline-section {
+  margin: 3rem 0 2.5rem;
+}
+
+.sw-timeline-section h2 {
+  margin-bottom: 0.3rem;
+}
+
+.sw-timeline-sub {
+  margin-bottom: 1.6rem;
+  opacity: 0.9;
+}
+
+.sw-timeline-bar {
+  position: relative;
+  padding: 1.4rem 1.2rem;
+  border-radius: 16px;
+  background: radial-gradient(circle at 0% 0%, rgba(56,189,248,0.18) 0, transparent 55%), rgba(15,23,42,0.86);
+  border: 1px solid rgba(148,163,184,0.4);
+  overflow-x: auto;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(220px, 1fr);
+  gap: 1.6rem;
+}
+
+.sw-timeline-item {
+  position: relative;
+  padding: 0.6rem 0.8rem 0.8rem;
+  border-radius: 10px;
+  background: rgba(15,23,42,0.85);
+  border: 1px solid transparent;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.sw-timeline-item::before {
+  content: "";
+  position: absolute;
+  top: -0.9rem;
+  left: 1.1rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(148,163,184,0.7);
+  box-shadow: 0 0 12px rgba(148,163,184,0.9);
+}
+
+.sw-timeline-item-current {
+  border-color: var(--vp-c-brand);
+  box-shadow: 0 0 20px rgba(56,189,248,0.35);
+}
+
+.sw-timeline-item-current::before {
+  background: var(--vp-c-brand);
+  box-shadow: 0 0 16px rgba(56,189,248,0.85);
+}
+
+.sw-era {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.sw-era-time {
+  display: block;
+  font-size: 0.88rem;
+  opacity: 0.85;
+  margin-bottom: 0.2rem;
+}
+
+.sw-era-tag {
+  display: block;
+  font-size: 0.86rem;
+  color: var(--vp-c-brand-light);
+}
+
+.sw-timeline-link {
+  margin-top: 0.8rem;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* 介绍卡片样式 */
+.sw-intro-card {
+  margin-top: 1.8rem;
+  margin-bottom: 2.8rem;
+  padding: 1.8rem 1.9rem;
+  border-radius: 16px;
+  background: rgba(15,23,42,0.9);
+  border: 1px solid rgba(148,163,184,0.4);
+  box-shadow: 0 18px 40px rgba(15,23,42,0.55);
+}
+
+.sw-intro-card p {
+  margin: 0.4rem 0;
+}
+
+.sw-intro-card .force {
+  margin-top: 0.9rem;
+  color: var(--vp-c-brand-light);
+  font-weight: bold;
+}
+
+/* 响应式调整 */
+@media (max-width: 960px) {
+  .sw-video-overlay {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .sw-timeline-bar {
+    grid-auto-columns: minmax(200px, 1fr);
+  }
 }

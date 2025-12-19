@@ -8,16 +8,13 @@
   font-size: 3rem;
   margin-top: 3rem;
   margin-bottom: 2rem;
-
   text-align: center;        
   margin-left: auto;          
   margin-right: auto;
-
   background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-
   filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.4));
 }
 
@@ -54,7 +51,6 @@
   text-align: justify;
 }
 
-/* 首段首字下沉：限定在正文文档区域 */
 .vp-doc > p:first-of-type::first-letter {
   float: left;
   font-size: 3.5rem;
@@ -89,66 +85,49 @@
   opacity: 0.5;
 }
 
-/* 强调：限定在 vp-doc，避免影响导航等 */
 .vp-doc strong {
   color: #fde047;
   font-weight: 700;
   text-shadow: 0 0 5px rgba(253, 224, 71, 0.4);
 }
 
-/* =====================================================
-                       禁止 H1 图标
-   ===================================================== */
-
-/* 禁止 H1 本体的所有伪元素 */
 .vp-doc h1::before,
 .vp-doc h1::after {
   content: none !important;
   display: none !important;
 }
 
-/* 禁止 H1 内部任何元素的伪元素（兜底） */
 .vp-doc h1 *::before,
 .vp-doc h1 *::after {
   content: none !important;
   display: none !important;
 }
 
-/* 禁止 header-anchor 搞事情（VitePress 常见来源） */
 .vp-doc h1 .header-anchor,
 .vp-doc h1 .header-anchor::before,
 .vp-doc h1 .header-anchor::after {
   display: none !important;
 }
-/* =====================================================
-             黄线之间的 blockquote 内容居中
-   ===================================================== */
 
-/* 整个引用块作为居中容器 */
+/* 居中引用文字 */
 .vp-doc blockquote {
-  text-align: center;          /* 核心：文字居中 */
+  text-align: center;          
   margin-left: auto;
   margin-right: auto;
-  max-width: 760px;            /* 控制行宽，防止过散 */
+  max-width: 760px;            
 }
 
-/* blockquote 内所有段落统一居中 */
 .vp-doc blockquote p {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* 如果英文是斜体或单独一行，保持居中 */
 .vp-doc blockquote em,
 .vp-doc blockquote i {
   display: inline-block;
   text-align: center;
 }
-
-/* =====================================================
-             单独控制index页h1标题样式
-   ===================================================== */
 
 .VPHomeHero .name {
   font-family: "StarJedi", var(--vp-font-family-base);
@@ -157,9 +136,6 @@
   font-size: 3rem;
   margin-top: 3rem;
   margin-bottom: 2rem;
-
-  /* 不要写 text-align / margin-left / margin-right */
-
   background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -169,28 +145,52 @@
 }
 
 /* =====================================================
-          扩展页面宽度以适应大屏幕显示
+            修复大屏显示文字过于集中，展开文字区域
    ===================================================== */
 
-/* 1. 增加整体布局的最大宽度 */
-/* 默认值通常是 1440px。增加到 1920px 或更高，甚至使用 100%（不推荐，可能会太宽） */
 :root {
-  --vp-layout-max-width: 1820px; /* 调整整个页面的最大显示宽度 */
+  --vp-layout-max-width: 1820px;
 }
 
-/* 2. 扩大主要内容区域的宽度（针对大屏幕） */
-/* 在 1440px 或更大屏幕上生效 */
 @media (min-width: 1440px) {
-  /* 覆盖带有右侧大纲（has-aside）的文档页面内容宽度 */
-  /* 默认值计算后通常在 700px 左右，这里将其设置为更宽的值，例如 1300px */
   .VPDoc.has-aside .content-container {
     max-width: 1200px !important; 
   }
-  
-  /* 想调整没有侧边栏或大纲的页面的宽度，可以取消注释并修改以下代码 */
-  /*
-  .VPDoc:not(.has-sidebar) .container {
-    max-width: 1500px !important;
-  }
-  */
+}
+
+/* 删除表格外方框容器 */
+.vp-doc .table-container,
+.VPDoc .table-container {
+  background: transparent !important;
+  border: 0 !important;             
+  border-radius: 0 !important;       
+  box-shadow: none !important;       
+  padding: 0 !important;             
+}
+
+.vp-doc .table-container::before,
+.vp-doc .table-container::after,
+.VPDoc .table-container::before,
+.VPDoc .table-container::after {
+  content: none !important;         
+}
+
+.vp-doc table,
+.VPDoc table,
+.vp-doc .table-container table,
+.VPDoc .table-container table {
+  background: transparent !important;
+  border-radius: 0 !important;        
+  box-shadow: none !important;      
+}
+
+.vp-doc table {
+  border-collapse: collapse;          
+  width: 100%;                        
+}
+
+.vp-doc th,
+.vp-doc td {
+  border: 1px solid var(--vp-c-divider) !important; 
+  background: transparent !important;               
 }

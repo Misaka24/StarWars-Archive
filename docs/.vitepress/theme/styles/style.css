@@ -9,6 +9,6 @@
 @import "./sw-home.css";
 @import "./sw-carousel-events.css";
 @import "./sw-sidebar-autohide.css";
-@import "./sidebar-float.css";
-@import "./scanline.css";
+@import "./sw-sidebar-float.css";
+@import "./sw-scanline.css";
 

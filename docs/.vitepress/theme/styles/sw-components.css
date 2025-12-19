@@ -1,5 +1,5 @@
 /* =========================================
-   styles/sw-components.css  (卡片/图片/代码/表格/链接/滚动条)
+   styles/sw-components.css  (卡片/代码/表格/链接/滚动条)
    ========================================= */
 .vp-doc img {
   border-radius: 10px;
@@ -61,7 +61,6 @@
   border-radius: 10px;
 }
 
-/* 代码块：帝国终端 */
 .vp-doc pre {
   background-color: #0f172a !important;
   border: 1px solid #1e293b;
@@ -90,7 +89,6 @@
   font-family: "Courier New", monospace;
 }
 
-/* 表格：终端数据网格 */
 .vp-doc table {
   background: rgba(15, 23, 42, 0.4);
   border-collapse: collapse;
@@ -126,7 +124,7 @@
   transition: background-color 0.3s;
 }
 
-/* 正文链接：片头黄（不影响导航/侧栏） */
+/* 正文链接：片头黄 */
 .vp-doc a {
   color: #fde047;
   text-decoration: none;

@@ -1,14 +1,12 @@
 /* ===============================
-   左侧悬浮隐藏侧栏
+   styles/sw-sidebar-float.css （左侧悬浮隐藏侧栏）
    =============================== */
 
 :root {
-  /* 用 VitePress 自带变量兜底，避免不同断点下侧栏宽度变化导致偏移不够 */
   --sidebar-width: var(--vp-sidebar-width, 260px);
-  --sidebar-peek: 8px; /* 触发条可见宽度 */
+  --sidebar-peek: 8px; 
 }
 
-/* 固定侧栏，不占文档流 */
 .VPSidebar {
   position: fixed;
   top: 0;
@@ -20,7 +18,6 @@
   transition: transform .25s ease;
 }
 
-/* 触发条（左侧 8px） */
 .sidebar-trigger-zone {
   position: fixed;
   left: 0;
@@ -30,12 +27,10 @@
   z-index: 40;
 }
 
-/* 收起状态：按自身宽度 -100% 收起，只保留 8px 触发条 */
 .sidebar-auto-hide .VPSidebar {
   transform: translateX(calc(-100% + var(--sidebar-peek)));
 }
 
-/* 展开状态 */
 .sidebar-open .VPSidebar {
   transform: translateX(0);
 }
@@ -44,18 +39,15 @@
    正文容器布局调整
    =============================== */
 
-/* 默认正文：留出侧栏空间 */
 .VPContent.has-sidebar {
   padding-left: var(--sidebar-width);
   transition: padding-left .25s ease;
 }
 
-/* 收起 → 正文利用左侧空间 */
 .sidebar-auto-hide .VPContent.has-sidebar {
   padding-left: 0;
 }
 
-/* 展开 → 恢复原来布局 */
 .sidebar-open .VPContent.has-sidebar {
   padding-left: var(--sidebar-width);
 }
@@ -70,7 +62,7 @@
   top: 50%;
   left: 0;
   width: 100%;
-  height: 260px; /* 呼吸条明显加长 */
+  height: 260px; 
   transform: translateY(-50%);
   background: linear-gradient(
     to right,
@@ -82,13 +74,12 @@
   animation: sidebar-hint-breathe-long 6.2s ease-in-out infinite;
 }
 
-/* 幅度稍微拉大，但不刺眼 */
 @keyframes sidebar-hint-breathe-long {
   0% {
-    opacity: 0.14;   /* 比之前略亮一点 */
+    opacity: 0.14;  
   }
   50% {
-    opacity: 0.72;   /* 峰值小幅提高 */
+    opacity: 0.72;  
   }
   100% {
     opacity: 0.14;
@@ -103,18 +94,13 @@ body.is-home .sidebar-trigger-zone::after {
   display: none !important;
 }
 /* =========================================
-   终极修复：彻底移除大屏左右留白（VitePress 变量级）
+  修复：移除大屏左右留白
    ========================================= */
 
 @media (min-width: 960px) {
   :root {
-    /* 整体布局最大宽度 */
     --vp-layout-max-width: 100% !important;
-
-    /* 顶部导航最大宽度 */
     --vp-nav-max-width: 100% !important;
-
-    /* 文档正文最大宽度 */
     --vp-doc-max-width: 100% !important;
   }
 }

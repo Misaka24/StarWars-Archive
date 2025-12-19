@@ -1,5 +1,5 @@
 /* =========================================
-   styles/sw-base.css  (深色底 + 星空背景 + 动画)
+   styles/sw-base.css  (页面背景控制）
    ========================================= */
 html {
   background-color: #020617 !important;
@@ -13,7 +13,7 @@ html {
   --vp-c-text: #e5e7eb;
 }
 
-/* 星空背景：只在 dark 下给 body */
+/* 星空背景*/
 .dark body {
   background-color: #000;
   background-image:

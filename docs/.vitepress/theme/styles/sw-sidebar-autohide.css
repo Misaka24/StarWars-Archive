@@ -1,5 +1,5 @@
 /* =========================================
-   styles/sw-sidebar-autohide.css  (侧边栏 hover 自动展开：可选)
+   styles/sw-sidebar-autohide.css  (侧边栏自动展开)
    ========================================= */
 .VPDoc {
   position: relative;
@@ -18,7 +18,6 @@
   z-index: 20;
 }
 
-/* Hover 展开 */
 .VPDoc:hover .VPSidebar {
   width: 220px !important;
   opacity: 1;
