@@ -1,0 +1,85 @@
+/* =========================================
+   styles/sw-images.css  (图片样式控制)
+   ========================================= */
+
+.vp-doc table {
+    display: table !important;
+    width: 100% !important;
+    table-layout: fixed !important; 
+    border-collapse: collapse !important;
+    margin: 20px 0 !important;
+}
+
+.vp-doc table td,
+.vp-doc table th {
+    border: 1px solid #1a202c !important;
+    padding: 12px 8px !important;
+    text-align: center !important; 
+    vertical-align: middle !important;
+}
+
+.sw-compare-img {
+    width: 100% !important;
+    aspect-ratio: 16 / 10 !important;
+    object-fit: cover !important;
+    object-position: center 20% !important;
+    border-radius: 8px !important;
+    display: block;
+    margin: 0 auto;
+}
+
+.sw-logo {
+    display: inline-block !important; 
+    width: 45px !important;
+    height: auto;
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 768px) {
+
+    .vp-doc [class*="table-container"] {
+        overflow-x: auto !important;
+        display: block !important;
+        width: 100% !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .vp-doc [class*="table-container"] table {
+        min-width: 600px !important;
+        width: 600px !important; 
+    }
+
+    .vp-doc [class*="table-container"] table tr th:nth-child(1),
+    .vp-doc [class*="table-container"] table tr td:nth-child(1) {
+        width: 80px !important;
+    }
+
+    .vp-doc [class*="table-container"] table tr th:nth-child(2),
+    .vp-doc [class*="table-container"] table tr td:nth-child(2),
+    .vp-doc [class*="table-container"] table tr th:nth-child(3),
+    .vp-doc [class*="table-container"] table tr td:nth-child(3) {
+        width: 260px !important;
+    }
+
+    .vp-doc [class*="table-container"] .sw-compare-img {
+        width: 100% !important;
+        aspect-ratio: 4 / 3 !important;     
+        height: auto !important;            
+        max-height: none !important;       
+        object-fit: contain !important;     
+        object-position: center !important; 
+        background: rgba(0, 0, 0, 0.25);    
+        border-radius: 8px !important;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .vp-doc [class*="table-container"] table td {
+        overflow: visible !important;
+    }
+
+    .vp-doc table td {
+        font-size: 13px !important;
+        white-space: normal !important; 
+    }
+}
