@@ -63,7 +63,7 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           port: ${{ secrets.DEPLOY_PORT }}
-          key: ${{ secrets.DEPLOY_KEY }}
+          key: ${{ fromJson('"' + secrets.DEPLOY_KEY + '"') }}
 
           source: "docs/.vitepress/dist/**"
           target: "/tmp/starwars-archive-deploy"
