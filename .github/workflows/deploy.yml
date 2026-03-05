@@ -1,4 +1,4 @@
-Name: Deploy StarWars Archive (3 Modes)
+name: Deploy StarWars Archive (3 Modes)
 
 on:
   push:
