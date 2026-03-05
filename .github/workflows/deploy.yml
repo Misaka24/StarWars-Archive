@@ -105,3 +105,8 @@ jobs:
               /var/www/starwars-archive/
 
             chmod -R 755 /var/www/starwars-archive
+            
+      - name: Debug Key Fingerprint
+        run: |
+        echo "${{ secrets.DEPLOY_KEY }}" > key
+        ssh-keygen -lf key || true
