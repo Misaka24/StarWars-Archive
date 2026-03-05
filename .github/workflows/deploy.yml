@@ -87,6 +87,13 @@ jobs:
           strip_components: 1   # ⭐ 去掉 rawsite/
           rm: true
 
+      # 🔍 Debug: print key fingerprint
+      - name: Debug Key Fingerprint
+        run: |
+          echo "${{ secrets.DEPLOY_KEY }}" > key
+          chmod 600 key
+          ssh-keygen -lf key || true
+          
       # 6️⃣ 统一发布到站点根目录（你已经验证成功的方案）
       - name: Publish to web root
         uses: appleboy/ssh-action@v1.0.3
@@ -105,8 +112,3 @@ jobs:
               /var/www/starwars-archive/
 
             chmod -R 755 /var/www/starwars-archive
-            
-      - name: Debug Key Fingerprint
-        run: |
-        echo "${{ secrets.DEPLOY_KEY }}" > key
-        ssh-keygen -lf key || true
